@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b45720e0-eb1b-4a59-9cdf-e5d7e044291d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java-chat-client.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java-chat-client.ipr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java-chat-client.iws" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/controller/ChatController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/controller/ConnectedUserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/controller/ConnectionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/controller/MainController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/dependencyfactory/DependencyFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/ChatModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/ConnectedUserModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/ConnectionModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/MainModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/commandtemplate/IChatCommandTemplate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/commandtemplate/ICommandTemplate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/commandtemplate/IConnectionCommandTemplate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/commandtemplate/local/ChatLocalCommandTemplate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/commandtemplate/local/ConnectionLocalCommandTemplate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/commandtemplate/local/socket/CommandInvoker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/commandtemplate/remote/socket/ChatRemoteCommandTemplate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/commandtemplate/remote/socket/ConnectionRemoteCommandTemplate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/protocol/vo/CommandTemplateEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/protocol/vo/CommandTypeEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/protocol/vo/RemoteEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/protocol/vo/command/AbstractCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/protocol/vo/command/ConnectCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/protocol/vo/command/DisconnectCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/protocol/vo/command/ICommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/protocol/vo/command/SendMessageCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/strategy/AbstractCommandTemplateFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/strategy/ICommandTemplateFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/strategy/IConnectionStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/strategy/factory/ICommunicationStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/strategy/factory/RMIStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/strategy/factory/SocketStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/strategy/rmi/RMICommandTemplateFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/strategy/rmi/RMIConnectionStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/strategy/socket/SocketCommandTemplateFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/communication/strategy/socket/SocketConnectionStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/configuration/Configuration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/configuration/entity/ChatUserHistory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/configuration/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/exception/ConnectionException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/model/util/LogUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/view/ChatView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/view/ConnectedUserView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/view/ConnectionView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/view/MainView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/view/listener/ChatTextPaneKeyListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/view/listener/MainWindowAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/phcarvalho/view/util/DialogUtil.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1Ui3qdnheZSuL5xKKKyPenYEVCj" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/phcarvalho/view" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.phcarvalho.view" />
+      <recent name="com.phcarvalho.model" />
+      <recent name="com.phcarvalho.controller" />
+      <recent name="com.phcarvalho.model.communication.protocol.vo.command" />
+      <recent name="com.phcarvalho.model.exception" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\PH\Workspace\Java\java-chat-client\src\main\java\com\phcarvalho\view" />
+      <recent name="C:\Users\PH\Workspace\Java\java-chat-client\src\main\java\com\phcarvalho\model" />
+      <recent name="C:\Users\PH\Workspace\Java\java-chat-client\src\main\java\com\phcarvalho\controller" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Application" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.phcarvalho.Application" />
+      <module name="java-chat-client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Application" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b45720e0-eb1b-4a59-9cdf-e5d7e044291d" name="Default Changelist" comment="" />
+      <created>1575825780226</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1575825780226</updated>
+      <workItem from="1575825785132" duration="3281000" />
+      <workItem from="1575829135853" duration="6895000" />
+      <workItem from="1575852651046" duration="209000" />
+      <workItem from="1575852884985" duration="4428000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
