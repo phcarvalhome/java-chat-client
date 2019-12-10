@@ -3,6 +3,7 @@ package com.phcarvalho.view;
 import com.phcarvalho.controller.ConnectedUserController;
 import com.phcarvalho.dependencyfactory.DependencyFactory;
 import com.phcarvalho.model.configuration.entity.User;
+import com.phcarvalho.view.listener.GenericMouseAdapter;
 import com.phcarvalho.view.util.DialogUtil;
 
 import javax.swing.*;
@@ -21,8 +22,6 @@ public class ConnectedUserView extends JPanel {
     private DialogUtil dialogUtil;
     private JList<User> list;
     private JPanel bottomPanel;
-    private JLabel turnUserLabel;
-    private JLabel turnUserValueLabel;
 
     public ConnectedUserView(ConnectedUserController controller) {
         super(new GridBagLayout());
@@ -30,8 +29,6 @@ public class ConnectedUserView extends JPanel {
         dialogUtil = DependencyFactory.getSingleton().get(DialogUtil.class);
         list = new JList();
         bottomPanel = new JPanel(new GridBagLayout());
-        turnUserLabel = new JLabel("Turn user:");
-        turnUserValueLabel = new JLabel(EMPTY_LABEL);
         initialize();
     }
 
@@ -46,6 +43,7 @@ public class ConnectedUserView extends JPanel {
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
         list.setEnabled(true);
+        list.addMouseListener(new GenericMouseAdapter(() -> setTargetUser()));
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.insets = new Insets(2, 4, 2, 4);
@@ -59,26 +57,22 @@ public class ConnectedUserView extends JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new Insets(2, 4, 2, 4);
         add(bottomPanel, gridBagConstraints);
-
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new Insets(2, 4, 2, 4);
-        bottomPanel.add(turnUserLabel, gridBagConstraints);
-
-        turnUserValueLabel.setPreferredSize(new Dimension(140, 30));
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new Insets(2, 4, 2, 4);
-        bottomPanel.add(turnUserValueLabel, gridBagConstraints);
     }
 
     public void add(User user){
         controller.add(user);
     }
 
+    private void setTargetUser() {
+        User targetUser = list.getSelectedValue();
+
+        if(targetUser != null)
+            mainView.getChatView().setTargetUser(targetUser);
+    }
+
     public void removeByCallback(User user) {
         String message = String.join("",
-                "The user ", user.getName(), " is DISCONNECTED!");
+                "The user ", user.getName(), " is offline!");
 
 //        list.repaint();
         mainView.getConsoleView().displaySystemMessage(message);
@@ -86,14 +80,13 @@ public class ConnectedUserView extends JPanel {
 
     public void reset() {
         controller.clear();
-        turnUserValueLabel.setText(EMPTY_LABEL);
     }
 
     public void setMainView(MainView mainView) {
         this.mainView = mainView;
     }
 
-    public JList getList() {
+    public JList<User> getList() {
         return list;
     }
 }

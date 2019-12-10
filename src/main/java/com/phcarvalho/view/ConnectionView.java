@@ -193,7 +193,7 @@ public class ConnectionView extends JPanel {
         localPortValueLabel.setText(remoteUser.getPort().toString());
         connectToServerButton.setEnabled(false);
 //        mainView.getConnectedPlayerView().getStartGameButton().setEnabled(true);
-//        mainView.getChatView().getMessageTextField().setEnabled(true);
+        mainView.getChatView().getMessageTextField().setEnabled(true);
 
         User sourceUser = connectCommand.getSourceUser();
 
@@ -201,7 +201,7 @@ public class ConnectionView extends JPanel {
             mainView.getConsoleView().displaySystemMessage("The server is connected!");
         else
             mainView.getConsoleView().displaySystemMessage(String.join("",
-                    "The player ", sourceUser.getName(), " is CONNECTED!"));
+                    "The user ", sourceUser.getName(), " is online!"));
 
 //        dialogUtil.showInformation("The server is connected!", SERVER_CONNECTION);
     }

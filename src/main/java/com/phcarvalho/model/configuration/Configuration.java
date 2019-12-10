@@ -28,16 +28,19 @@ public class Configuration {
         serverConnected = false;
     }
 
-    public void addChatHistory(User user){
-        chatUserHistoryMap.put(user, new ChatUserHistory(user));
-    }
-
     public void removeChatHistory(User user){
         chatUserHistoryMap.remove(user);
     }
 
     public ChatUserHistory getChatHistory(User user){
-        return chatUserHistoryMap.get(user);
+        ChatUserHistory chatUserHistory = chatUserHistoryMap.get(user);
+
+        if (chatUserHistory == null){
+            chatUserHistory = new ChatUserHistory(user);
+            chatUserHistoryMap.put(user, chatUserHistory);
+        }
+
+        return chatUserHistory;
     }
 
     public void clear(){

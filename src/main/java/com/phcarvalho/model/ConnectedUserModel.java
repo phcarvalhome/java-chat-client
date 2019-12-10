@@ -1,6 +1,8 @@
 package com.phcarvalho.model;
 
 import com.phcarvalho.controller.ConnectedUserController;
+import com.phcarvalho.model.communication.protocol.vo.command.ConnectCommand;
+import com.phcarvalho.model.configuration.Configuration;
 import com.phcarvalho.model.configuration.entity.User;
 
 import javax.swing.*;
@@ -21,6 +23,17 @@ public class ConnectedUserModel {
 
     public void clear() {
         list.clear();
+    }
+
+    public void refreshList(ConnectCommand connectCommand) {
+        User localUser = Configuration.getSingleton().getLocalUser();
+
+        clear();
+        connectCommand.getConnectedUserList().forEach(connectedUser -> {
+
+            if(!localUser.equals(connectedUser))
+                add(connectedUser);
+        });
     }
 
     public int getUserIndex(User user) {

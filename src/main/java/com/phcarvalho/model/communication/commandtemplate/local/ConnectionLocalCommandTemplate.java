@@ -24,9 +24,7 @@ public class ConnectionLocalCommandTemplate extends UnicastRemoteObject implemen
     @Override
     public void connect(ConnectCommand connectCommand) throws RemoteException {
         connectionModel.connectToServerByCallback(connectCommand);
-        connectedUserModel.clear();
-        connectCommand.getConnectedUserList().forEach(connectedUser -> connectedUserModel
-                .add(connectedUser));
+        connectedUserModel.refreshList(connectCommand);
     }
 
     @Override

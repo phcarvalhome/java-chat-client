@@ -1,26 +1,31 @@
 package com.phcarvalho.model.configuration.entity;
 
+import com.phcarvalho.model.communication.protocol.vo.command.SendMessageCommand;
+
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public class ChatUserHistory {
 
     private User user;
-    private StringBuilder historyBuilder;
+    private List<SendMessageCommand> messageList;
 
     public ChatUserHistory(User user) {
         this.user = user;
+        messageList = new LinkedList<>();
     }
 
-    public void append(String message){
-        historyBuilder.append(message);
+    public void addMessage(SendMessageCommand sendMessageCommand){
+        messageList.add(sendMessageCommand);
     }
 
     public User getUser() {
         return user;
     }
 
-    public String getHistory() {
-        return historyBuilder.toString();
+    public List<SendMessageCommand> getMessageList() {
+        return messageList;
     }
 
     @Override
@@ -38,9 +43,9 @@ public class ChatUserHistory {
 
     @Override
     public String toString() {
-        return "ChatHistory{" +
+        return "ChatUserHistory{" +
                 "user=" + user +
-                ", historyBuilder=" + historyBuilder +
+                ", messageList=" + messageList +
                 '}';
     }
 }
