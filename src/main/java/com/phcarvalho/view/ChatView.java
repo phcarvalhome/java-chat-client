@@ -2,6 +2,8 @@ package com.phcarvalho.view;
 
 import com.phcarvalho.controller.ChatController;
 import com.phcarvalho.dependencyfactory.DependencyFactory;
+import com.phcarvalho.model.communication.protocol.vo.command.BecomeOfflineCommand;
+import com.phcarvalho.model.communication.protocol.vo.command.BecomeOnlineCommand;
 import com.phcarvalho.model.communication.protocol.vo.command.SendMessageCommand;
 import com.phcarvalho.model.configuration.Configuration;
 import com.phcarvalho.model.configuration.entity.ChatUserHistory;
@@ -18,13 +20,16 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.rmi.RemoteException;
+import java.time.format.DateTimeFormatter;
 
 public class ChatView extends JPanel {
 
     private static final String TITLE = "Chat";
     private static final int WIDTH = 760;
-    private static final int HEIGHT = 220;
+    private static final int HEIGHT = 240;
     private static final String SEND_MESSAGE = "Send Message";
+
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     private ChatController controller;
     private MainView mainView;
@@ -92,10 +97,6 @@ public class ChatView extends JPanel {
     }
 
     public void sendMessageByCallback(SendMessageCommand sendMessageCommand) {
-//        String sourceUser = sendMessageCommand.getSourceUser().getName();
-//
-//        sourceUser = sourceUser.replace(">>> ", "");
-//        displayMessage(sourceUser, sendMessageCommand.getMessage(), Color.BLACK);
         User targetUser = mainView.getConnectedUserView().getList().getSelectedValue();
 
         if(targetUser != null && targetUser.equals(sendMessageCommand.getSourceUser()))
@@ -109,10 +110,10 @@ public class ChatView extends JPanel {
 
     private void displayMessage(SendMessageCommand sendMessageCommand){
         //TODO formatar datetime...
-        String formattedDateTime = sendMessageCommand.getDateTime().toString();
+        String formattedDateTime = dateTimeFormatter.format(sendMessageCommand.getDateTime());
 
-        append(sendMessageCommand.getSourceUser().getName(), buildSimpleAttributeSetWithBold(Color.BLACK));
-        append(" [" + formattedDateTime + "]: ", buildSimpleAttributeSet(Color.BLACK));
+        append(formattedDateTime + " | ", buildSimpleAttributeSet(Color.BLACK));
+        append(sendMessageCommand.getSourceUser().getName() + ": ", buildSimpleAttributeSetWithBold(Color.BLACK));
         append(sendMessageCommand.getMessage() + "\n", buildSimpleAttributeSet(Color.BLACK));
     }
 
@@ -171,6 +172,31 @@ public class ChatView extends JPanel {
         titledBorder.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
         setBorder(titledBorder);
         display(targetUser);
+    }
+
+    public void becomeOnline(BecomeOnlineCommand becomeOnlineCommand) {
+
+        try {
+            controller.becomeOnline(becomeOnlineCommand);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void becomeOnlineByCallbackForEachTargetUser(User targetUser) {
+        User selectedTargetUser = mainView.getConnectedUserView().getList().getSelectedValue();
+
+        if(selectedTargetUser != null && selectedTargetUser.equals(targetUser))
+            display(targetUser);
+    }
+
+    public void becomeOffline(BecomeOfflineCommand becomeOfflineCommand) {
+
+        try {
+            controller.becomeOffline(becomeOfflineCommand);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setMainView(MainView mainView) {

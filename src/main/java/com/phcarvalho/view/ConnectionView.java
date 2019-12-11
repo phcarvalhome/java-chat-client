@@ -194,14 +194,16 @@ public class ConnectionView extends JPanel {
         connectToServerButton.setEnabled(false);
 //        mainView.getConnectedPlayerView().getStartGameButton().setEnabled(true);
         mainView.getChatView().getMessageTextField().setEnabled(true);
+        mainView.getConnectedUserView().getStatusCheckBox().setEnabled(true);
+        mainView.getConnectedUserView().getStatusCheckBox().setSelected(true);
 
         User sourceUser = connectCommand.getSourceUser();
 
-        if(sourceUser.equals(localUser))
+        if(localUser.equals(sourceUser))
             mainView.getConsoleView().displaySystemMessage("The server is connected!");
         else
             mainView.getConsoleView().displaySystemMessage(String.join("",
-                    "The user ", sourceUser.getName(), " is online!"));
+                    "The user ", sourceUser.getName(), " is connected!"));
 
 //        dialogUtil.showInformation("The server is connected!", SERVER_CONNECTION);
     }
@@ -227,6 +229,8 @@ public class ConnectionView extends JPanel {
 //        connectToServerButton.setEnabled(true);
 //        mainView.getConnectedPlayerView().getStartGameButton().setEnabled(false);
         mainView.getChatView().getMessageTextField().setEnabled(false);
+        mainView.getConnectedUserView().getStatusCheckBox().setEnabled(false);
+        mainView.getConnectedUserView().getStatusCheckBox().setSelected(false);
     }
 
     public void setMainView(MainView mainView) {

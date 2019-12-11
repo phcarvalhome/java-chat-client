@@ -10,11 +10,16 @@ public class User implements Serializable {
     private String name;
     private String host;
     private Integer port;
+    private Boolean online;
+
+    public User() {
+    }
 
     private User(String name, String host, Integer port) {
         this.name = name;
         this.host = host;
         this.port = port;
+        online = true;
     }
 
     public static User of(String host, Integer port){
@@ -51,6 +56,14 @@ public class User implements Serializable {
 
     public void setPort(Integer port) {
         this.port = port;
+    }
+
+    public Boolean getOnline() {
+        return online;
+    }
+
+    public void setOnline(Boolean online) {
+        this.online = online;
     }
 
     @Override

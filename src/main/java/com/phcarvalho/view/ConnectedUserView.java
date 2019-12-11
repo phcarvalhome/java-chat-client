@@ -2,6 +2,8 @@ package com.phcarvalho.view;
 
 import com.phcarvalho.controller.ConnectedUserController;
 import com.phcarvalho.dependencyfactory.DependencyFactory;
+import com.phcarvalho.model.communication.protocol.vo.command.BecomeOfflineCommand;
+import com.phcarvalho.model.communication.protocol.vo.command.BecomeOnlineCommand;
 import com.phcarvalho.model.configuration.entity.User;
 import com.phcarvalho.view.listener.GenericMouseAdapter;
 import com.phcarvalho.view.util.DialogUtil;
@@ -9,6 +11,8 @@ import com.phcarvalho.view.util.DialogUtil;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
 
 public class ConnectedUserView extends JPanel {
 
@@ -16,11 +20,13 @@ public class ConnectedUserView extends JPanel {
     private static final String EMPTY_LABEL = "-";
     private static final int WIDTH = 280;
     private static final int HEIGHT = 120;
+    private static final String ONLINE = "Online";
 
     private ConnectedUserController controller;
     private MainView mainView;
     private DialogUtil dialogUtil;
     private JList<User> list;
+    private JCheckBox statusCheckBox;
     private JPanel bottomPanel;
 
     public ConnectedUserView(ConnectedUserController controller) {
@@ -28,6 +34,7 @@ public class ConnectedUserView extends JPanel {
         this.controller = controller;
         dialogUtil = DependencyFactory.getSingleton().get(DialogUtil.class);
         list = new JList();
+        statusCheckBox = new JCheckBox(ONLINE);
         bottomPanel = new JPanel(new GridBagLayout());
         initialize();
     }
@@ -57,6 +64,22 @@ public class ConnectedUserView extends JPanel {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new Insets(2, 4, 2, 4);
         add(bottomPanel, gridBagConstraints);
+
+        statusCheckBox.setEnabled(false);
+        statusCheckBox.addItemListener(itemEvent -> changeStatus(itemEvent));
+//        messageTextField.setPreferredSize(new Dimension(WIDTH, 30));
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new Insets(2, 4, 2, 4);
+        add(statusCheckBox, gridBagConstraints);
+    }
+
+    private void changeStatus(ItemEvent itemEvent) {
+
+        if(itemEvent.getStateChange() == ItemEvent.SELECTED)
+            mainView.getChatView().becomeOnline(new BecomeOnlineCommand());
+        else
+            mainView.getChatView().becomeOffline(new BecomeOfflineCommand());
     }
 
     public void add(User user){
@@ -72,7 +95,7 @@ public class ConnectedUserView extends JPanel {
 
     public void removeByCallback(User user) {
         String message = String.join("",
-                "The user ", user.getName(), " is offline!");
+                "The user ", user.getName(), " is disconnected!");
 
 //        list.repaint();
         mainView.getConsoleView().displaySystemMessage(message);
@@ -88,5 +111,9 @@ public class ConnectedUserView extends JPanel {
 
     public JList<User> getList() {
         return list;
+    }
+
+    public JCheckBox getStatusCheckBox() {
+        return statusCheckBox;
     }
 }

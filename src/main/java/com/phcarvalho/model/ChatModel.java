@@ -1,13 +1,15 @@
 package com.phcarvalho.model;
 
 import com.phcarvalho.controller.ChatController;
-import com.phcarvalho.controller.ConsoleController;
 import com.phcarvalho.dependencyfactory.DependencyFactory;
+import com.phcarvalho.model.communication.protocol.vo.command.BecomeOfflineCommand;
+import com.phcarvalho.model.communication.protocol.vo.command.BecomeOnlineCommand;
 import com.phcarvalho.model.communication.protocol.vo.command.SendMessageCommand;
 import com.phcarvalho.model.communication.strategy.ICommandTemplateFactory;
 import com.phcarvalho.model.configuration.Configuration;
 import com.phcarvalho.model.configuration.entity.ChatUserHistory;
 import com.phcarvalho.model.configuration.entity.User;
+import com.phcarvalho.model.vo.OfflineMessageList;
 
 import java.rmi.RemoteException;
 
@@ -36,5 +38,25 @@ public class ChatModel {
 
         chatHistory.addMessage(sendMessageCommand);
         controller.sendMessageByCallback(sendMessageCommand);
+    }
+
+    public void becomeOnline(BecomeOnlineCommand becomeOnlineCommand) throws RemoteException {
+        commandTemplateFactory.getChat().becomeOnline(becomeOnlineCommand);
+    }
+
+    public void becomeOnlineByCallback(BecomeOnlineCommand becomeOnlineCommand) {
+        OfflineMessageList offlineMessageList = becomeOnlineCommand.getOfflineMessageList();
+
+        offlineMessageList.getSendMessageCommandList().forEach(sendMessageCommand -> {
+            User targetUser = sendMessageCommand.getSourceUser();
+            ChatUserHistory chatHistory = Configuration.getSingleton().getChatHistory(targetUser);
+
+            chatHistory.addMessage(sendMessageCommand);
+            controller.becomeOnlineByCallbackForEachTargetUser(targetUser);
+        });
+    }
+
+    public void becomeOffline(BecomeOfflineCommand becomeOfflineCommand) throws RemoteException {
+        commandTemplateFactory.getChat().becomeOffline(becomeOfflineCommand);
     }
 }

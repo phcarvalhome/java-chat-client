@@ -1,6 +1,8 @@
 package com.phcarvalho.view;
 
 import com.phcarvalho.controller.ConsoleController;
+import com.phcarvalho.model.communication.protocol.vo.command.BecomeOfflineCommand;
+import com.phcarvalho.model.communication.protocol.vo.command.BecomeOnlineCommand;
 import com.phcarvalho.model.communication.protocol.vo.command.SendMessageCommand;
 import com.phcarvalho.model.configuration.Configuration;
 import com.phcarvalho.model.configuration.entity.User;
@@ -52,14 +54,6 @@ public class ConsoleView extends JPanel {
 
         scrollPane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         add(scrollPane, gridBagConstraints);
-
-//        messageTextField.setEnabled(false);
-//        messageTextField.addKeyListener(new ChatTextPaneKeyListener(() -> displayMessage()));
-//        messageTextField.setPreferredSize(new Dimension(WIDTH, 30));
-//        gridBagConstraints.gridx = 0;
-//        gridBagConstraints.gridy = 1;
-//        gridBagConstraints.insets = new Insets(2, 4, 2, 4);
-//        add(messageTextField, gridBagConstraints);
     }
 
     private void displayMessage(String sourceUser, String message, Color color){
@@ -101,6 +95,20 @@ public class ConsoleView extends JPanel {
         String remoteUserName = Configuration.getSingleton().getRemoteUser().getName();
 
         displayMessage(remoteUserName, message, Color.BLACK);
+    }
+
+    public void becomeOnlineByCallback(BecomeOnlineCommand becomeOnlineCommand) {
+        User sourceUser = becomeOnlineCommand.getSourceUser();
+
+        displaySystemMessage(String.join("",
+                "The user ", sourceUser.getName(), " is online!"));
+    }
+
+    public void becomeOfflineByCallback(BecomeOfflineCommand becomeOfflineCommand) {
+        User sourceUser = becomeOfflineCommand.getSourceUser();
+
+        displaySystemMessage(String.join("",
+                "The user ", sourceUser.getName(), " is offline!"));
     }
 
     public void setMainView(MainView mainView) {

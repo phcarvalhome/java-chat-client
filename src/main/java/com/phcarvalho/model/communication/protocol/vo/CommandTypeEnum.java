@@ -4,7 +4,9 @@ public enum CommandTypeEnum {
 
     SEND_MESSAGE(CommandTemplateEnum.CHAT, "sendMessage"),
     CONNECT(CommandTemplateEnum.CONNECTION, "connect"),
-    DISCONNECT(CommandTemplateEnum.CONNECTION, "disconnect");
+    DISCONNECT(CommandTemplateEnum.CONNECTION, "disconnect"),
+    BECOME_ONLINE(CommandTemplateEnum.CHAT, "becomeOnline"),
+    BECOME_OFFLINE(CommandTemplateEnum.CHAT, "becomeOffline");
 
     private CommandTemplateEnum template;
     private String value;

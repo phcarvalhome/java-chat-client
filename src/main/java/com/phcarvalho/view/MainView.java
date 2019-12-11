@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class MainView extends JFrame {
 
-    private static final String TITLE = "Chinese Checkers - Client";
+    private static final String TITLE = "Chat - Client";
 
     private MainController controller;
     private JPanel mainPanel;

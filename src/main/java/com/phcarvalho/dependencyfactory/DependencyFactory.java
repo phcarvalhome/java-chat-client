@@ -3,6 +3,7 @@ package com.phcarvalho.dependencyfactory;
 import com.phcarvalho.controller.*;
 import com.phcarvalho.model.*;
 import com.phcarvalho.model.communication.commandtemplate.local.socket.CommandInvoker;
+import com.phcarvalho.model.communication.service.QueueHandlerClient;
 import com.phcarvalho.model.communication.strategy.ICommandTemplateFactory;
 import com.phcarvalho.model.communication.strategy.IConnectionStrategy;
 import com.phcarvalho.model.communication.strategy.factory.ICommunicationStrategy;
@@ -38,6 +39,8 @@ public class DependencyFactory {
         dependencyMap.put(SocketConnectionStrategy.class, new SocketConnectionStrategy());
         dependencyMap.put(IConnectionStrategy.class, communicationStrategyFactory.buildConnectionStrategy());
         dependencyMap.put(ICommandTemplateFactory.class, communicationStrategyFactory.buildCommandTemplateFactory());
+
+        dependencyMap.put(QueueHandlerClient.class, new QueueHandlerClient());
 
         buildConnectedUserMVC();
         buildConnectionMVC();
